@@ -17,9 +17,12 @@ class DestinationDetailScreen extends ConsumerWidget {
     return Scaffold(
       body: destinationsAsync.when(
         data: (destinations) {
+          if (destinations.isEmpty) {
+            return const Center(child: Text('No destinations found'));
+          }
           final destination = destinations.firstWhere(
             (e) => e.id == destinationId,
-            orElse: () => destinations.first, // Fallback for demo
+            orElse: () => destinations.first,
           );
 
           return CustomScrollView(
@@ -95,7 +98,7 @@ class DestinationDetailScreen extends ConsumerWidget {
                                 label: Text(amenity),
                                 backgroundColor: Theme.of(
                                   context,
-                                ).primaryColor.withOpacity(0.1),
+                                ).primaryColor.withBlue(0),
                               ),
                             )
                             .toList(),
@@ -117,7 +120,7 @@ class DestinationDetailScreen extends ConsumerWidget {
           color: Theme.of(context).cardColor,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 10,
               offset: const Offset(0, -5),
             ),
@@ -126,7 +129,7 @@ class DestinationDetailScreen extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            destinationsAsync.hasValue
+            destinationsAsync.hasValue && destinationsAsync.value!.isNotEmpty
                 ? Text(
                     '\$${destinationsAsync.value!.firstWhere((e) => e.id == destinationId, orElse: () => destinationsAsync.value!.first).pricePerNight.toStringAsFixed(0)} / night',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(

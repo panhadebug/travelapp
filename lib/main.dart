@@ -5,6 +5,8 @@ import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 // import 'firebase_options.dart'; // Uncomment if using real Firebase
 
+final firebaseInitializedProvider = Provider<bool>((ref) => false);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(
@@ -24,7 +26,7 @@ void main() async {
   try {
     await Firebase.initializeApp();
   } catch (e) {
-    print("Firebase init failed (expected if not configured): $e");
+    debugPrint("Firebase init failed (expected if not configured): $e");
   }
 
   runApp(const ProviderScope(child: MyApp()));

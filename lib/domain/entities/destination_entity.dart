@@ -18,7 +18,7 @@ class DestinationEntity extends Equatable {
     required this.pricePerNight,
     required this.rating,
     required this.imageUrls,
-    required this.amenities, required String imageUrl,
+    required this.amenities,
   });
 
   @override

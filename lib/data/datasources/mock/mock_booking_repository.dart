@@ -1,5 +1,5 @@
-import '../../domain/entities/booking_entity.dart';
-import '../../domain/repositories/booking_repository.dart';
+import '../../../domain/entities/booking_entity.dart';
+import '../../../domain/repositories/booking_repository.dart';
 
 class MockBookingRepository implements BookingRepository {
   final List<BookingEntity> _bookings = [];
